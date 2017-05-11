@@ -330,12 +330,10 @@ EnvWrapper::~EnvWrapper() {
 //
 //}
 
-//EnvOptions Env::OptimizeForLogWrite(const EnvOptions& env_options,
-//                                    const DBOptions& db_options) const {
-//  EnvOptions optimized_env_options(env_options);
-//  optimized_env_options.bytes_per_sync = db_options.wal_bytes_per_sync;
-//  return optimized_env_options;
-//}
+EnvOptions Env::OptimizeForLogWrite(const EnvOptions& env_options) const {
+  EnvOptions optimized_env_options(env_options);
+  return optimized_env_options;
+}
 
 EnvOptions Env::OptimizeForManifestWrite(const EnvOptions& env_options) const {
   return env_options;

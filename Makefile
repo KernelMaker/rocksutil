@@ -1,6 +1,6 @@
 CXX = g++
 
-CXXFLAGS = -DROCKSDB_PLATFORM_POSIX -DROCKSDB_LIB_IO_POSIX  -DOS_LINUX -O0 -g -gstabs+ -pg -pipe -fPIC -D__XDEBUG__ -W -Wwrite-strings -Wpointer-arith -Wreorder -Wswitch -Wsign-promo -Wredundant-decls -Wformat -Wall -Wconversion -Wno-unused-parameter -D_GNU_SOURCE -std=c++11
+CXXFLAGS = -DROCKSDB_LIB_IO_POSIX  -DOS_LINUX -O0 -g -gstabs+ -pg -pipe -fPIC -D__XDEBUG__ -W -Wwrite-strings -Wpointer-arith -Wreorder -Wswitch -Wsign-promo -Wredundant-decls -Wformat -Wall -Wconversion -Wno-unused-parameter -D_GNU_SOURCE -std=c++11
 
 PORT_DIR = ./port
 UTIL_DIR = ./util

@@ -13,36 +13,36 @@
 #ifndef STORAGE_LEVELDB_PORT_SYS_TIME_H_
 #define STORAGE_LEVELDB_PORT_SYS_TIME_H_
 
-#if defined(OS_WIN) && defined(_MSC_VER)
+//#if defined(OS_WIN) && defined(_MSC_VER)
 
-#include <time.h>
-
-namespace rocksdb {
-
-namespace port {
-
-// Avoid including winsock2.h for this definition
-typedef struct timeval {
-  long tv_sec;
-  long tv_usec;
-} timeval;
-
-void gettimeofday(struct timeval* tv, struct timezone* tz);
-
-inline struct tm* localtime_r(const time_t* timep, struct tm* result) {
-  errno_t ret = localtime_s(result, timep);
-  return (ret == 0) ? result : NULL;
-}
-}
-
-using port::timeval;
-using port::gettimeofday;
-using port::localtime_r;
-}
-
-#else
+//#include <time.h>
+//
+//namespace rocksdb {
+//
+//namespace port {
+//
+//// Avoid including winsock2.h for this definition
+//typedef struct timeval {
+//  long tv_sec;
+//  long tv_usec;
+//} timeval;
+//
+//void gettimeofday(struct timeval* tv, struct timezone* tz);
+//
+//inline struct tm* localtime_r(const time_t* timep, struct tm* result) {
+//  errno_t ret = localtime_s(result, timep);
+//  return (ret == 0) ? result : NULL;
+//}
+//}
+//
+//using port::timeval;
+//using port::gettimeofday;
+//using port::localtime_r;
+//}
+//
+//#else
 #include <time.h>
 #include <sys/time.h>
-#endif
+//#endif
 
 #endif  // STORAGE_LEVELDB_PORT_SYS_TIME_H_

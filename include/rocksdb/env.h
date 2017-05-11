@@ -26,11 +26,11 @@
 #include "rocksdb/status.h"
 //#include "rocksdb/thread_status.h"
 
-#ifdef _WIN32
-// Windows API macro interference
-#undef DeleteFile
-#undef GetCurrentTime
-#endif
+//#ifdef _WIN32
+//// Windows API macro interference
+//#undef DeleteFile
+//#undef GetCurrentTime
+//#endif
 
 namespace rocksdb {
 
@@ -44,8 +44,8 @@ class RandomRWFile;
 class Directory;
 //struct DBOptions;
 //class RateLimiter;
-class ThreadStatusUpdater;
-struct ThreadStatus;
+//class ThreadStatusUpdater;
+//struct ThreadStatus;
 
 using std::unique_ptr;
 using std::shared_ptr;
@@ -96,13 +96,13 @@ struct EnvOptions {
   bool fallocate_with_keep_size = true;
 
   // See DBOPtions doc
-  size_t compaction_readahead_size;
+//  size_t compaction_readahead_size;
 
   // See DBOPtions doc
-  size_t random_access_max_buffer_size;
+//  size_t random_access_max_buffer_size;
 
   // See DBOptions doc
-  size_t writable_file_max_buffer_size = 1024 * 1024;
+//  size_t writable_file_max_buffer_size = 1024 * 1024;
 
 //  // If not nullptr, write rate limiting is enabled for flush and compaction
 //  RateLimiter* rate_limiter = nullptr;
@@ -360,8 +360,8 @@ class Env {
   // OptimizeForLogWrite will create a new EnvOptions object that is a copy of
   // the EnvOptions in the parameters, but is optimized for writing log files.
   // Default implementation returns the copy of the same object.
-//  virtual EnvOptions OptimizeForLogWrite(const EnvOptions& env_options,
-//                                         const DBOptions& db_options) const;
+  virtual EnvOptions OptimizeForLogWrite(const EnvOptions& env_options) const;
+
   // OptimizeForManifestWrite will create a new EnvOptions object that is a copy
   // of the EnvOptions in the parameters, but is optimized for writing manifest
   // files. Default implementation returns the copy of the same object.
@@ -369,9 +369,9 @@ class Env {
       const;
 
   // Returns the status of all threads that belong to the current Env.
-  virtual Status GetThreadList(std::vector<ThreadStatus>* thread_list) {
-    return Status::NotSupported("Not supported.");
-  }
+//  virtual Status GetThreadList(std::vector<ThreadStatus>* thread_list) {
+//    return Status::NotSupported("Not supported.");
+//  }
 
   // Returns the pointer to ThreadStatusUpdater.  This function will be
   // used in RocksDB internally to update thread status and supports
@@ -1000,9 +1000,9 @@ class EnvWrapper : public Env {
     return target_->TimeToString(time);
   }
 
-  Status GetThreadList(std::vector<ThreadStatus>* thread_list) override {
-    return target_->GetThreadList(thread_list);
-  }
+//  Status GetThreadList(std::vector<ThreadStatus>* thread_list) override {
+//    return target_->GetThreadList(thread_list);
+//  }
 
 //  ThreadStatusUpdater* GetThreadStatusUpdater() const override {
 //    return target_->GetThreadStatusUpdater();
