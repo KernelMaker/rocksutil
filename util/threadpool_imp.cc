@@ -11,9 +11,7 @@
 #include <algorithm>
 #include <atomic>
 
-#ifndef OS_WIN
-#  include <unistd.h>
-#endif
+#include <unistd.h>
 
 #ifdef OS_LINUX
 #  include <sys/syscall.h>
@@ -34,56 +32,6 @@ void ThreadPoolImpl::PthreadCall(const char* label, int result) {
 }
 
 namespace {
-#ifdef ROCKSDB_STD_THREADPOOL
-
-struct Lock {
-  std::unique_lock<std::mutex> ul_;
-  explicit Lock(std::mutex& m) : ul_(m, std::defer_lock) {}
-};
-
-using Condition = std::condition_variable;
-
-inline int ThreadPoolMutexLock(Lock& mutex) {
-  mutex.ul_.lock();
-  return 0;
-}
-
-inline
-int ConditionWait(Condition& condition, Lock& lock) {
-  condition.wait(lock.ul_);
-  return 0;
-}
-
-inline
-int ConditionSignalAll(Condition& condition) {
-  condition.notify_all();
-  return 0;
-}
-
-inline
-int ConditionSignal(Condition& condition) {
-  condition.notify_one();
-  return 0;
-}
-
-inline
-int MutexUnlock(Lock& mutex) {
-  mutex.ul_.unlock();
-  return 0;
-}
-
-inline
-void ThreadJoin(std::thread& thread) {
-  thread.join();
-}
-
-inline
-int ThreadDetach(std::thread& thread) {
-  thread.detach();
-  return 0;
-}
-
-#else
 
 using Lock = pthread_mutex_t&;
 using Condition = pthread_cond_t&;
@@ -121,7 +69,6 @@ inline
 int ThreadDetach(pthread_t& thread) {
   return pthread_detach(thread);
 }
-#endif
 }
 
 ThreadPoolImpl::ThreadPoolImpl()
@@ -132,10 +79,8 @@ ThreadPoolImpl::ThreadPoolImpl()
       exit_all_threads_(false),
       low_io_priority_(false),
       env_(nullptr) {
-#ifndef ROCKSDB_STD_THREADPOOL
   PthreadCall("mutex_init", pthread_mutex_init(&mu_, nullptr));
   PthreadCall("cvar_init", pthread_cond_init(&bgsignal_, nullptr));
-#endif
 }
 
 ThreadPoolImpl::~ThreadPoolImpl() { assert(bgthreads_.size() == 0U); }
@@ -288,11 +233,6 @@ void ThreadPoolImpl::SetBackgroundThreads(int num) {
 void ThreadPoolImpl::StartBGThreads() {
   // Start background thread if necessary
   while ((int)bgthreads_.size() < total_threads_limit_) {
-#ifdef ROCKSDB_STD_THREADPOOL
-    std::thread p_t(&BGThreadWrapper,
-      new BGThreadMetadata(this, bgthreads_.size()));
-    bgthreads_.push_back(std::move(p_t));
-#else
     pthread_t t;
     PthreadCall("create thread",
                 pthread_create(&t, nullptr, &BGThreadWrapper,
@@ -308,7 +248,6 @@ void ThreadPoolImpl::StartBGThreads() {
 #endif
 #endif
     bgthreads_.push_back(t);
-#endif
   }
 }
 

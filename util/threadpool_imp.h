@@ -8,20 +8,10 @@
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 #pragma once
 
-#ifdef OS_WIN
-#  define ROCKSDB_STD_THREADPOOL
-#endif
-
 #include "rocksdb/env.h"
 #include "rocksdb/threadpool.h"
 #include "port/port.h"
 //#include "util/thread_status_util.h"
-
-#ifdef ROCKSDB_STD_THREADPOOL
-#  include <thread>
-#  include <mutex>
-#  include <condition_variable>
-#endif
 
 #include <atomic>
 #include <vector>
@@ -91,15 +81,9 @@ class ThreadPoolImpl : public ThreadPool {
 
   int total_threads_limit_;
 
-#ifdef ROCKSDB_STD_THREADPOOL
-  std::mutex mu_;
-  std::condition_variable bgsignal_;
-  std::vector<std::thread> bgthreads_;
-#else
   pthread_mutex_t mu_;
   pthread_cond_t bgsignal_;
   std::vector<pthread_t> bgthreads_;
-#endif
   BGQueue queue_;
   std::atomic_uint queue_len_;  // Queue length. Used for stats reporting
   bool exit_all_threads_;
