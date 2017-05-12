@@ -7,8 +7,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 
-#ifdef ROCKSDB_LIB_IO_POSIX
-
 #include "util/io_posix.h"
 #include <errno.h>
 #include <fcntl.h>
@@ -938,4 +936,3 @@ Status PosixDirectory::Fsync() {
   return Status::OK();
 }
 }  // namespace rocksdb
-#endif
