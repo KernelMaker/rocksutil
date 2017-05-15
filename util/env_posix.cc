@@ -39,17 +39,11 @@
 #include <deque>
 #include <set>
 #include "port/port.h"
-//#include "rocksdb/slice.h"
-//#include "util/coding.h"
 #include "util/io_posix.h"
-//#include "util/iostats_context_imp.h"
-//#include "util/logging.h"
 #include "util/posix_logger.h"
 #include "util/random.h"
 #include "util/string_util.h"
-//#include "util/sync_point.h"
 #include "util/thread_local.h"
-//#include "util/thread_status_updater.h"
 #include "util/threadpool_imp.h"
 
 #if !defined(TMPFS_MAGIC)
@@ -65,10 +59,6 @@
 namespace rocksutil {
 
 namespace {
-
-//ThreadStatusUpdater* CreateThreadStatusUpdater() {
-//  return new ThreadStatusUpdater();
-//}
 
 // list of pathnames that are locked
 static std::set<std::string> lockedFiles;
@@ -129,13 +119,6 @@ class PosixEnv : public Env {
     for (int pool_id = 0; pool_id < Env::Priority::TOTAL; ++pool_id) {
       thread_pools_[pool_id].JoinAllThreads();
     }
-    // Delete the thread_status_updater_ only when the current Env is not
-    // Env::Default().  This is to avoid the free-after-use error when
-    // Env::Default() is destructed while some other child threads are
-    // still trying to update thread status.
-//    if (this != Env::Default()) {
-//      delete thread_status_updater_;
-//    }
   }
 
   void SetFD_CLOEXEC(int fd, const EnvOptions* options) {
@@ -528,12 +511,6 @@ class PosixEnv : public Env {
     CreateDir(*result);
     return Status::OK();
   }
-
-//  virtual Status GetThreadList(
-//      std::vector<ThreadStatus>* thread_list) override {
-//    assert(thread_status_updater_);
-//    return thread_status_updater_->GetThreadList(thread_list);
-//  }
 
   static uint64_t gettid(pthread_t tid) {
     uint64_t thread_id = 0;

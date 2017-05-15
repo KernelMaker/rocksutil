@@ -21,7 +21,6 @@
 #include <sys/resource.h>
 #include <unistd.h>
 #include <cstdlib>
-//#include "util/logging.h"
 
 namespace rocksutil {
 namespace port {

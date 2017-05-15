@@ -24,8 +24,6 @@
 #endif
 
 #include "rocksutil/env.h"
-//#include "util/iostats_context_imp.h"
-//#include "util/sync_point.h"
 #include <atomic>
 
 namespace rocksutil {

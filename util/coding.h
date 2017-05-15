@@ -18,7 +18,6 @@
 #include <string.h>
 #include <string>
 
-//#include "rocksdb/write_batch.h"
 #include "rocksutil/slice.h"
 #include "port/port.h"
 

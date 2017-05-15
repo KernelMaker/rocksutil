@@ -24,13 +24,6 @@
 #include <string>
 #include <vector>
 #include "rocksutil/status.h"
-//#include "rocksdb/thread_status.h"
-
-//#ifdef _WIN32
-//// Windows API macro interference
-//#undef DeleteFile
-//#undef GetCurrentTime
-//#endif
 
 namespace rocksutil {
 
@@ -42,10 +35,6 @@ class Slice;
 class WritableFile;
 class RandomRWFile;
 class Directory;
-//struct DBOptions;
-//class RateLimiter;
-//class ThreadStatusUpdater;
-//struct ThreadStatus;
 
 using std::unique_ptr;
 using std::shared_ptr;
@@ -56,9 +45,6 @@ struct EnvOptions {
 
   // construct with default Options
   EnvOptions();
-
-  // construct from Options
-//  explicit EnvOptions(const DBOptions& options);
 
   // If true, then allow caching of data in environment buffers
   bool use_os_buffer = true;
@@ -94,18 +80,6 @@ struct EnvOptions {
   // write. By default, we set it to true for MANIFEST writes and false for
   // WAL writes
   bool fallocate_with_keep_size = true;
-
-  // See DBOPtions doc
-//  size_t compaction_readahead_size;
-
-  // See DBOPtions doc
-//  size_t random_access_max_buffer_size;
-
-  // See DBOptions doc
-//  size_t writable_file_max_buffer_size = 1024 * 1024;
-
-//  // If not nullptr, write rate limiting is enabled for flush and compaction
-//  RateLimiter* rate_limiter = nullptr;
 };
 
 class Env {
@@ -118,8 +92,7 @@ class Env {
     uint64_t size_bytes;
   };
 
-//  Env() : thread_status_updater_(nullptr) {}
-  Env() {}
+  Env() {};
 
   virtual ~Env();
 
@@ -368,36 +341,14 @@ class Env {
   virtual EnvOptions OptimizeForManifestWrite(const EnvOptions& env_options)
       const;
 
-  // Returns the status of all threads that belong to the current Env.
-//  virtual Status GetThreadList(std::vector<ThreadStatus>* thread_list) {
-//    return Status::NotSupported("Not supported.");
-//  }
-
-  // Returns the pointer to ThreadStatusUpdater.  This function will be
-  // used in RocksDB internally to update thread status and supports
-  // GetThreadList().
-//  virtual ThreadStatusUpdater* GetThreadStatusUpdater() const {
-//    return thread_status_updater_;
-//  }
-
   // Returns the ID of the current thread.
   virtual uint64_t GetThreadID() const;
-
- protected:
-  // The pointer to an internal structure that will update the
-  // status of each thread.
-//  ThreadStatusUpdater* thread_status_updater_;
 
  private:
   // No copying allowed
   Env(const Env&);
   void operator=(const Env&);
 };
-
-// The factory function to construct a ThreadStatusUpdater.  Any Env
-// that supports GetThreadList() feature should call this function in its
-// constructor to initialize thread_status_updater_.
-//ThreadStatusUpdater* CreateThreadStatusUpdater();
 
 // A file abstraction for reading sequentially through a file
 class SequentialFile {
@@ -1000,14 +951,6 @@ class EnvWrapper : public Env {
     return target_->TimeToString(time);
   }
 
-//  Status GetThreadList(std::vector<ThreadStatus>* thread_list) override {
-//    return target_->GetThreadList(thread_list);
-//  }
-
-//  ThreadStatusUpdater* GetThreadStatusUpdater() const override {
-//    return target_->GetThreadStatusUpdater();
-//  }
-
   uint64_t GetThreadID() const override {
     return target_->GetThreadID();
   }
@@ -1069,16 +1012,6 @@ class WritableFileWrapper : public WritableFile {
  private:
   WritableFile* target_;
 };
-
-// Returns a new environment that stores its data in memory and delegates
-// all non-file-storage tasks to base_env. The caller must delete the result
-// when it is no longer needed.
-// *base_env must remain live while the result is in use.
-Env* NewMemEnv(Env* base_env);
-
-// Returns a new environment that is used for HDFS environment.
-// This is a factory method for HdfsEnv declared in hdfs/env_hdfs.h
-Status NewHdfsEnv(Env** hdfs_env, const std::string& fsname);
 
 }  // namespace rocksutil
 

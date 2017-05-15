@@ -11,7 +11,6 @@
 #include "rocksutil/env.h"
 #include "rocksutil/threadpool.h"
 #include "port/port.h"
-//#include "util/thread_status_util.h"
 
 #include <atomic>
 #include <vector>

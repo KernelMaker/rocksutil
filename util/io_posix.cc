@@ -26,12 +26,9 @@
 #include <sys/syscall.h>
 #endif
 #include "port/port.h"
-//#include "rocksdb/slice.h"
 #include "util/coding.h"
-//#include "util/iostats_context_imp.h"
 #include "util/posix_logger.h"
 #include "util/string_util.h"
-//#include "util/sync_point.h"
 
 namespace rocksutil {
 

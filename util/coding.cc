@@ -11,7 +11,6 @@
 
 #include <algorithm>
 #include "rocksutil/slice.h"
-//#include "rocksdb/slice_transform.h"
 
 namespace rocksutil {
 
