@@ -3,7 +3,6 @@ LIB_SOURCES = \
 	util/env.cc \
 	util/env_posix.cc \
 	util/io_posix.cc \
-	util/logging.cc \
 	util/random.cc \
 	util/status.cc \
 	util/status_message.cc \

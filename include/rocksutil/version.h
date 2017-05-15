@@ -4,13 +4,13 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 #pragma once
 
-#define ROCKSDB_MAJOR 1
-#define ROCKSDB_MINOR 0
-#define ROCKSDB_PATCH 0
+#define ROCKSUTIL_MAJOR 5
+#define ROCKSUTIL_MINOR 0
+#define ROCKSUTIL_PATCH 1
 
 // Do not use these. We made the mistake of declaring macros starting with
 // double underscore. Now we have to live with our choice. We'll deprecate these
 // at some point
-#define __ROCKSDB_MAJOR__ ROCKSDB_MAJOR
-#define __ROCKSDB_MINOR__ ROCKSDB_MINOR
-#define __ROCKSDB_PATCH__ ROCKSDB_PATCH
+//#define __ROCKSDB_MAJOR__ ROCKSDB_MAJOR
+//#define __ROCKSDB_MINOR__ ROCKSDB_MINOR
+//#define __ROCKSDB_PATCH__ ROCKSDB_PATCH

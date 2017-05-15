@@ -23,12 +23,12 @@
 #endif
 #endif
 
-#include "rocksdb/env.h"
+#include "rocksutil/env.h"
 //#include "util/iostats_context_imp.h"
 //#include "util/sync_point.h"
 #include <atomic>
 
-namespace rocksdb {
+namespace rocksutil {
 
 class PosixLogger : public Logger {
  private:
@@ -124,7 +124,7 @@ class PosixLogger : public Logger {
       assert(p <= limit);
       const size_t write_size = p - base;
 
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
       const int kDebugLogChunkSize = 128 * 1024;
 
       // If this write would cross a boundary of kDebugLogChunkSize
@@ -163,4 +163,4 @@ class PosixLogger : public Logger {
   size_t GetLogFileSize() const override { return log_size_; }
 };
 
-}  // namespace rocksdb
+}  // namespace rocksutil

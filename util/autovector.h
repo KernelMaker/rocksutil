@@ -11,7 +11,7 @@
 #include <stdexcept>
 #include <vector>
 
-namespace rocksdb {
+namespace rocksutil {
 
 // A vector that leverages pre-allocated stack-based array to achieve better
 // performance for array with small amount of items.
@@ -321,4 +321,4 @@ autovector<T, kSize>& autovector<T, kSize>::assign(const autovector& other) {
 
   return *this;
 }
-}  // namespace rocksdb
+}  // namespace rocksutil

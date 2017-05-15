@@ -3,9 +3,9 @@
 // LICENSE file in the root directory of this source tree. An additional grant
 // of patent rights can be found in the PATENTS file in the same directory.
 
-#include "rocksdb/status.h"
+#include "rocksutil/status.h"
 
-namespace rocksdb {
+namespace rocksutil {
 
 const char* Status::msgs[] = {
     "",                                                   // kNone
@@ -15,4 +15,4 @@ const char* Status::msgs[] = {
     "No space left on device"                             // kNoSpace
 };
 
-}  // namespace rocksdb
+}  // namespace rocksutil

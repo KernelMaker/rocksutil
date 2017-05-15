@@ -14,13 +14,13 @@
 // non-const method, all threads accessing the same Status must use
 // external synchronization.
 
-#ifndef STORAGE_ROCKSDB_INCLUDE_STATUS_H_
-#define STORAGE_ROCKSDB_INCLUDE_STATUS_H_
+#ifndef STORAGE_ROCKSUTIL_INCLUDE_STATUS_H_
+#define STORAGE_ROCKSUTIL_INCLUDE_STATUS_H_
 
 #include <string>
-#include "rocksdb/slice.h"
+#include "rocksutil/slice.h"
 
-namespace rocksdb {
+namespace rocksutil {
 
 class Status {
  public:
@@ -281,6 +281,6 @@ inline bool Status::operator!=(const Status& rhs) const {
   return !(*this == rhs);
 }
 
-}  // namespace rocksdb
+}  // namespace rocksutil
 
-#endif  // STORAGE_ROCKSDB_INCLUDE_STATUS_H_
+#endif  // STORAGE_ROCKSUTIL_INCLUDE_STATUS_H_

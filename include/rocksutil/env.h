@@ -14,8 +14,8 @@
 // All Env implementations are safe for concurrent access from
 // multiple threads without any external synchronization.
 
-#ifndef STORAGE_ROCKSDB_INCLUDE_ENV_H_
-#define STORAGE_ROCKSDB_INCLUDE_ENV_H_
+#ifndef STORAGE_ROCKSUTIL_INCLUDE_ENV_H_
+#define STORAGE_ROCKSUTIL_INCLUDE_ENV_H_
 
 #include <stdint.h>
 #include <cstdarg>
@@ -23,7 +23,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "rocksdb/status.h"
+#include "rocksutil/status.h"
 //#include "rocksdb/thread_status.h"
 
 //#ifdef _WIN32
@@ -32,7 +32,7 @@
 //#undef GetCurrentTime
 //#endif
 
-namespace rocksdb {
+namespace rocksutil {
 
 class FileLock;
 class Logger;
@@ -1080,6 +1080,6 @@ Env* NewMemEnv(Env* base_env);
 // This is a factory method for HdfsEnv declared in hdfs/env_hdfs.h
 Status NewHdfsEnv(Env** hdfs_env, const std::string& fsname);
 
-}  // namespace rocksdb
+}  // namespace rocksutil
 
-#endif  // STORAGE_ROCKSDB_INCLUDE_ENV_H_
+#endif  // STORAGE_ROCKUTIL_INCLUDE_ENV_H_

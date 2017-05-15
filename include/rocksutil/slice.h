@@ -16,8 +16,8 @@
 // non-const method, all threads accessing the same Slice must use
 // external synchronization.
 
-#ifndef STORAGE_ROCKSDB_INCLUDE_SLICE_H_
-#define STORAGE_ROCKSDB_INCLUDE_SLICE_H_
+#ifndef STORAGE_ROCKSUTIL_INCLUDE_SLICE_H_
+#define STORAGE_ROCKSUTIL_INCLUDE_SLICE_H_
 
 #include <assert.h>
 #include <cstdio>
@@ -25,7 +25,7 @@
 #include <string.h>
 #include <string>
 
-namespace rocksdb {
+namespace rocksutil {
 
 class Slice {
  public:
@@ -109,7 +109,7 @@ class Slice {
   // Compare two slices and returns the first byte where they differ
   size_t difference_offset(const Slice& b) const;
 
- // private: make these public for rocksdbjni access
+ // private: make these public for rocksutiljni access
   const char* data_;
   size_t size_;
 
@@ -155,6 +155,6 @@ inline size_t Slice::difference_offset(const Slice& b) const {
   return off;
 }
 
-}  // namespace rocksdb
+}  // namespace rocksutil
 
-#endif  // STORAGE_ROCKSDB_INCLUDE_SLICE_H_
+#endif  // STORAGE_ROCKSUTIL_INCLUDE_SLICE_H_

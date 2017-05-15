@@ -22,7 +22,7 @@
 #endif
 
 
-namespace rocksdb {
+namespace rocksutil {
 
 void ThreadPoolImpl::PthreadCall(const char* label, int result) {
   if (result != 0) {
@@ -241,7 +241,7 @@ void ThreadPoolImpl::StartBGThreads() {
 #if defined(_GNU_SOURCE) && defined(__GLIBC_PREREQ)
 #if __GLIBC_PREREQ(2, 12)
     char name_buf[16];
-    snprintf(name_buf, sizeof name_buf, "rocksdb:bg%" ROCKSDB_PRIszt,
+    snprintf(name_buf, sizeof name_buf, "rocksutil:bg%" ROCKSUTIL_PRIszt,
              bgthreads_.size());
     name_buf[sizeof name_buf - 1] = '\0';
     pthread_setname_np(t, name_buf);
@@ -317,4 +317,4 @@ ThreadPool* NewThreadPool(int num_threads) {
   return thread_pool;
 }
 
-}  // namespace rocksdb
+}  // namespace rocksutil

@@ -8,8 +8,8 @@
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 #pragma once
 
-#include "rocksdb/env.h"
-#include "rocksdb/threadpool.h"
+#include "rocksutil/env.h"
+#include "rocksutil/threadpool.h"
 #include "port/port.h"
 //#include "util/thread_status_util.h"
 
@@ -17,7 +17,7 @@
 #include <vector>
 #include <deque>
 
-namespace rocksdb {
+namespace rocksutil {
 
 class ThreadPoolImpl : public ThreadPool {
  public:
@@ -94,4 +94,4 @@ class ThreadPoolImpl : public ThreadPool {
   void SetBackgroundThreadsInternal(int num, bool allow_reduce);
 };
 
-}  // namespace rocksdb
+}  // namespace rocksutil

@@ -8,7 +8,7 @@
 #include <vector>
 #include "util/string_util.h"
 
-namespace rocksdb {
+namespace rocksutil {
 
 std::vector<std::string> StringSplit(const std::string& arg, char delim) {
   std::vector<std::string> splits;
@@ -20,4 +20,4 @@ std::vector<std::string> StringSplit(const std::string& arg, char delim) {
   return splits;
 }
 
-}  // namespace rocksdb
+}  // namespace rocksutil

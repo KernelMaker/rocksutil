@@ -144,7 +144,7 @@ EXAMPLE = example
 
 # if user didn't config LIBNAME, set the default
 ifeq ($(LIBNAME),)
-# we should only run rocksdb in production with DEBUG_LEVEL 0
+# we should only run rocksutil in production with DEBUG_LEVEL 0
 ifeq ($(DEBUG_LEVEL),0)
         LIBNAME=librocksutil
 else
@@ -153,9 +153,9 @@ endif
 endif
 LIBRARY = ${LIBNAME}.a
 
-ROCKSDB_MAJOR = $(shell egrep "ROCKSDB_MAJOR.[0-9]" include/rocksdb/version.h | cut -d ' ' -f 3)
-ROCKSDB_MINOR = $(shell egrep "ROCKSDB_MINOR.[0-9]" include/rocksdb/version.h | cut -d ' ' -f 3)
-ROCKSDB_PATCH = $(shell egrep "ROCKSDB_PATCH.[0-9]" include/rocksdb/version.h | cut -d ' ' -f 3)
+ROCKSUTIL_MAJOR = $(shell egrep "ROCKSUTIL_MAJOR.[0-9]" include/rocksutil/version.h | cut -d ' ' -f 3)
+ROCKSUTIL_MINOR = $(shell egrep "ROCKSUTIL_MINOR.[0-9]" include/rocksutil/version.h | cut -d ' ' -f 3)
+ROCKSUTIL_PATCH = $(shell egrep "ROCKSUTIL_PATCH.[0-9]" include/rocksutil/version.h | cut -d ' ' -f 3)
 
 #-----------------------------------------------
 # Create platform independent shared libraries.
@@ -169,9 +169,9 @@ SHARED3 = $(SHARED1)
 SHARED4 = $(SHARED1)
 SHARED = $(SHARED1)
 else
-SHARED_MAJOR = $(ROCKSDB_MAJOR)
-SHARED_MINOR = $(ROCKSDB_MINOR)
-SHARED_PATCH = $(ROCKSDB_PATCH)
+SHARED_MAJOR = $(ROCKSUTIL_MAJOR)
+SHARED_MINOR = $(ROCKSUTIL_MINOR)
+SHARED_PATCH = $(ROCKSUTIL_PATCH)
 SHARED1 = ${LIBNAME}.$(PLATFORM_SHARED_EXT)
 ifeq ($(PLATFORM), OS_MACOSX)
 SHARED_OSX = $(LIBNAME).$(SHARED_MAJOR)

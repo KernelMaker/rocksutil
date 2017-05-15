@@ -33,7 +33,7 @@
 #include "util/string_util.h"
 //#include "util/sync_point.h"
 
-namespace rocksdb {
+namespace rocksutil {
 
 // A wrapper for fadvise, if the platform doesn't support fadvise,
 // it will simply return Status::NotSupport.
@@ -400,7 +400,7 @@ PosixMmapReadableFile::PosixMmapReadableFile(const int fd,
 PosixMmapReadableFile::~PosixMmapReadableFile() {
   int ret = munmap(mmapped_region_, length_);
   if (ret != 0) {
-    fprintf(stdout, "failed to munmap %p length %" ROCKSDB_PRIszt " \n",
+    fprintf(stdout, "failed to munmap %p length %" ROCKSUTIL_PRIszt " \n",
             mmapped_region_, length_);
   }
 }
@@ -460,7 +460,7 @@ Status PosixMmapFile::UnmapCurrentRegion() {
 }
 
 Status PosixMmapFile::MapNewRegion() {
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
   assert(base_ == nullptr);
 
   // we can't fallocate with FALLOC_FL_KEEP_SIZE here
@@ -518,7 +518,7 @@ PosixMmapFile::PosixMmapFile(const std::string& fname, int fd, size_t page_size,
       dst_(nullptr),
       last_sync_(nullptr),
       file_offset_(0) {
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
   allow_fallocate_ = options.allow_fallocate;
   fallocate_with_keep_size_ = options.fallocate_with_keep_size;
 #endif
@@ -629,7 +629,7 @@ Status PosixMmapFile::InvalidateCache(size_t offset, size_t length) {
 #endif
 }
 
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
 Status PosixMmapFile::Allocate(uint64_t offset, uint64_t len) {
   assert(offset <= std::numeric_limits<off_t>::max());
   assert(len <= std::numeric_limits<off_t>::max());
@@ -655,7 +655,7 @@ Status PosixMmapFile::Allocate(uint64_t offset, uint64_t len) {
 PosixWritableFile::PosixWritableFile(const std::string& fname, int fd,
                                      const EnvOptions& options)
     : filename_(fname), fd_(fd), filesize_(0) {
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
   allow_fallocate_ = options.allow_fallocate;
   fallocate_with_keep_size_ = options.fallocate_with_keep_size;
 #endif
@@ -718,7 +718,7 @@ Status PosixWritableFile::Close() {
     // but it will be nice to log these errors.
     int dummy __attribute__((unused));
     dummy = ftruncate(fd_, filesize_);
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
     // in some file systems, ftruncate only trims trailing space if the
     // new file size is smaller than the current size. Calling fallocate
     // with FALLOC_FL_PUNCH_HOLE flag to explicitly release these unused
@@ -778,7 +778,7 @@ Status PosixWritableFile::InvalidateCache(size_t offset, size_t length) {
 #endif
 }
 
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
 Status PosixWritableFile::Allocate(uint64_t offset, uint64_t len) {
   assert(offset <= std::numeric_limits<off_t>::max());
   assert(len <= std::numeric_limits<off_t>::max());
@@ -935,4 +935,4 @@ Status PosixDirectory::Fsync() {
   }
   return Status::OK();
 }
-}  // namespace rocksdb
+}  // namespace rocksutil

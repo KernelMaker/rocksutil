@@ -14,11 +14,11 @@
 // size_t printf formatting named in the manner of C99 standard formatting
 // strings such as PRIu64
 // in fact, we could use that one
-#define ROCKSDB_PRIszt "zu"
+#define ROCKSUTIL_PRIszt "zu"
 
 #define __declspec(S)
 
-#define ROCKSDB_NOEXCEPT noexcept
+#define ROCKSUTIL_NOEXCEPT noexcept
 
 #undef PLATFORM_IS_LITTLE_ENDIAN
 #if defined(OS_MACOSX)
@@ -74,7 +74,7 @@
 #define fdatasync fsync
 #endif
 
-namespace rocksdb {
+namespace rocksutil {
 namespace port {
 
 // For use at db/file_indexer.h kLevelMaxIndex
@@ -171,4 +171,4 @@ extern void Crash(const std::string& srcfile, int srcline);
 extern int GetMaxOpenFiles();
 
 } // namespace port
-} // namespace rocksdb
+} // namespace rocksutil

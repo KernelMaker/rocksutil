@@ -62,7 +62,7 @@
 #define EXT4_SUPER_MAGIC 0xEF53
 #endif
 
-namespace rocksdb {
+namespace rocksutil {
 
 namespace {
 
@@ -521,7 +521,7 @@ class PosixEnv : public Env {
       *result = env;
     } else {
       char buf[100];
-      snprintf(buf, sizeof(buf), "/tmp/rocksdbtest-%d", int(geteuid()));
+      snprintf(buf, sizeof(buf), "/tmp/rocksutiltest-%d", int(geteuid()));
       *result = buf;
     }
     // Directory may already exist
@@ -561,7 +561,7 @@ class PosixEnv : public Env {
       return IOError(fname, errno);
     } else {
       int fd = fileno(f);
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
       fallocate(fd, FALLOC_FL_KEEP_SIZE, 0, 4 * 1024);
 #endif
       SetFD_CLOEXEC(fd, nullptr);
@@ -705,7 +705,7 @@ class PosixEnv : public Env {
   }
 
   bool SupportsFastAllocate(const std::string& path) {
-#ifdef ROCKSDB_FALLOCATE_PRESENT
+#ifdef ROCKSUTIL_FALLOCATE_PRESENT
     struct statfs s;
     if (statfs(path.c_str(), &s)){
       return false;
@@ -839,4 +839,4 @@ Env* Env::Default() {
   return &default_env;
 }
 
-}  // namespace rocksdb
+}  // namespace rocksutil

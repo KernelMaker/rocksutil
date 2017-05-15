@@ -17,12 +17,12 @@
 #include "util/autovector.h"
 #include "port/port.h"
 
-#ifndef ROCKSDB_SUPPORT_THREAD_LOCAL
-#define ROCKSDB_SUPPORT_THREAD_LOCAL \
+#ifndef ROCKSUTIL_SUPPORT_THREAD_LOCAL
+#define ROCKSUTIL_SUPPORT_THREAD_LOCAL \
   !defined(OS_WIN) && !defined(OS_MACOSX) && !defined(IOS_CROSS_COMPILE)
 #endif
 
-namespace rocksdb {
+namespace rocksutil {
 
 // Cleanup function that will be called for a stored thread local
 // pointer (if not NULL) when one of the following happens:
@@ -202,7 +202,7 @@ class ThreadLocalPtr {
     // The private mutex.  Developers should always use Mutex() instead of
     // using this variable directly.
     port::Mutex mutex_;
-#if ROCKSDB_SUPPORT_THREAD_LOCAL
+#if ROCKSUTIL_SUPPORT_THREAD_LOCAL
     // Thread local storage
     static __thread ThreadData* tls_;
 #endif
@@ -217,4 +217,4 @@ class ThreadLocalPtr {
   const uint32_t id_;
 };
 
-}  // namespace rocksdb
+}  // namespace rocksutil

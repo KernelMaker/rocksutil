@@ -24,7 +24,7 @@ fi
 # we depend on C++11
 PLATFORM_CXXFLAGS="-std=c++11"
 # we currently depend on POSIX platform
-COMMON_FLAGS="-DROCKSDB_LIB_IO_POSIX"
+COMMON_FLAGS=
 
 # Delete existing output, if it exists
 rm -f "$OUTPUT"
@@ -142,7 +142,7 @@ if [ "$CROSS_COMPILE" = "true" ]; then
     # Also don't need any compilation tests if compiling on fbcode
     true
 else
-    if ! test $ROCKSDB_DISABLE_FALLOCATE; then
+    if ! test $ROCKSUTIL_DISABLE_FALLOCATE; then
         # Test whether fallocate is available
         $CXX $CFLAGS -x c++ - -o /dev/null 2>/dev/null  <<EOF
           #include <fcntl.h>
@@ -153,7 +153,7 @@ else
           }
 EOF
         if [ "$?" = 0 ]; then
-            COMMON_FLAGS="$COMMON_FLAGS -DROCKSDB_FALLOCATE_PRESENT"
+            COMMON_FLAGS="$COMMON_FLAGS -DROCKSUTIL_FALLOCATE_PRESENT"
         fi
     fi
 
@@ -166,7 +166,7 @@ EOF
       }
 EOF
     if [ "$?" = 0 ]; then
-        COMMON_FLAGS="$COMMON_FLAGS -DROCKSDB_PTHREAD_ADAPTIVE_MUTEX"
+        COMMON_FLAGS="$COMMON_FLAGS -DROCKSUTIL_PTHREAD_ADAPTIVE_MUTEX"
     fi
 
     # Test if -pg is supported
