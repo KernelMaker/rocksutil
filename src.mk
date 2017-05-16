@@ -15,4 +15,6 @@ LIB_SOURCES = \
 
 EXAMPLE_SOURCE = \
 	examples/log_example.cc \
-	examples/thread_local_example.cc
+	examples/thread_local_example.cc \
+	examples/mutexlock_example.cc \
+	examples/thread_pool_example.cc

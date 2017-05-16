@@ -140,7 +140,7 @@ FORCE:
 LIBOBJECTS = $(LIB_SOURCES:.cc=.o)
 LIBOBJECTS += $(EXAMPLE_SOURCES:.cc=.o)
 
-EXAMPLES = log_example thread_local_example
+EXAMPLES = log_example thread_local_example mutexlock_example thread_pool_example
 
 # if user didn't config LIBNAME, set the default
 ifeq ($(LIBNAME),)
@@ -216,6 +216,12 @@ log_example: examples/log_example.o $(LIBOBJECTS)
 	$(AM_LINK)
 
 thread_local_example: examples/thread_local_example.o $(LIBOBJECTS)
+	$(AM_LINK)
+
+mutexlock_example: examples/mutexlock_example.o $(LIBOBJECTS)
+	$(AM_LINK)
+
+thread_pool_example: examples/thread_pool_example.o $(LIBOBJECTS)
 	$(AM_LINK)
 
 clean:
