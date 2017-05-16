@@ -10,10 +10,8 @@
 #include <list>
 #include <string>
 
-//#include "db/filename.h"
 #include "port/port.h"
 #include "port/util_logger.h"
-//#include "util/sync_point.h"
 #include "rocksutil/mutexlock.h"
 
 namespace rocksutil {
