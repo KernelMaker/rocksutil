@@ -140,7 +140,7 @@ FORCE:
 LIBOBJECTS = $(LIB_SOURCES:.cc=.o)
 LIBOBJECTS += $(EXAMPLE_SOURCES:.cc=.o)
 
-EXAMPLES = log_example
+EXAMPLES = log_example thread_local_example
 
 # if user didn't config LIBNAME, set the default
 ifeq ($(LIBNAME),)
@@ -213,6 +213,9 @@ $(LIBRARY): $(LIBOBJECTS)
 	$(AM_V_at)$(AR) $(ARFLAGS) $@ $(LIBOBJECTS)
 
 log_example: examples/log_example.o $(LIBOBJECTS)
+	$(AM_LINK)
+
+thread_local_example: examples/thread_local_example.o $(LIBOBJECTS)
 	$(AM_LINK)
 
 clean:

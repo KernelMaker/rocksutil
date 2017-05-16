@@ -14,4 +14,5 @@ LIB_SOURCES = \
 	port/port_posix.cc
 
 EXAMPLE_SOURCE = \
-	examples/log_example.cc
+	examples/log_example.cc \
+	examples/thread_local_example.cc
