@@ -43,7 +43,7 @@
 #include "util/posix_logger.h"
 #include "util/random.h"
 #include "util/string_util.h"
-#include "util/thread_local.h"
+#include "rocksutil/thread_local.h"
 #include "util/threadpool_imp.h"
 
 #if !defined(TMPFS_MAGIC)

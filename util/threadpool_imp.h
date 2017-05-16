@@ -9,7 +9,7 @@
 #pragma once
 
 #include "rocksutil/env.h"
-#include "rocksutil/threadpool.h"
+#include "util/threadpool.h"
 #include "port/port.h"
 
 #include <atomic>

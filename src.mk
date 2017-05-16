@@ -10,7 +10,8 @@ LIB_SOURCES = \
 	util/thread_local.cc \
 	util/threadpool_imp.cc \
 	util/build_version.cc \
+	util/auto_roll_logger.cc \
 	port/port_posix.cc
 
 EXAMPLE_SOURCE = \
-	examples/example.cc
+	examples/log_example.cc

@@ -26,7 +26,7 @@
 #include <sys/syscall.h>
 #endif
 #include "port/port.h"
-#include "util/coding.h"
+#include "rocksutil/coding.h"
 #include "util/posix_logger.h"
 #include "util/string_util.h"
 

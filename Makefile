@@ -140,7 +140,7 @@ FORCE:
 LIBOBJECTS = $(LIB_SOURCES:.cc=.o)
 LIBOBJECTS += $(EXAMPLE_SOURCES:.cc=.o)
 
-EXAMPLE = example
+EXAMPLES = log_example
 
 # if user didn't config LIBNAME, set the default
 ifeq ($(LIBNAME),)
@@ -200,23 +200,23 @@ endif  # PLATFORM_SHARED_EXT
 
 .PHONY: clean tags dbg static_lib shared_lib all
 
-all: $(LIBRARY) example
+all: $(LIBRARY) $(EXAMPLES)
 
 static_lib: $(LIBRARY)
 
 shared_lib: $(SHARED)
 
-dbg: $(LIBRARY) example
+dbg: $(LIBRARY) $(EXAMPLES)
 
 $(LIBRARY): $(LIBOBJECTS)
 	$(AM_V_AR)rm -f $@
 	$(AM_V_at)$(AR) $(ARFLAGS) $@ $(LIBOBJECTS)
 
-example: examples/example.o $(LIBOBJECTS)
+log_example: examples/log_example.o $(LIBOBJECTS)
 	$(AM_LINK)
 
 clean:
-	rm -f $(EXAMPLE) $(LIBRARY) $(SHARED)
+	rm -f $(EXAMPLES) $(LIBRARY) $(SHARED)
 	rm -rf $(CLEAN_FILES) ios-x86 ios-arm
 	find . -name "*.[oda]" -exec rm -f {} \;
 	find . -type f -regex ".*\.\(\(gcda\)\|\(gcno\)\)" -exec rm {} \;

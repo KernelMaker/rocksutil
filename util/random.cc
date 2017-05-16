@@ -12,7 +12,7 @@
 #include <utility>
 
 #include "port/likely.h"
-#include "util/thread_local.h"
+#include "rocksutil/thread_local.h"
 
 #if ROCKSUTIL_SUPPORT_THREAD_LOCAL
 #define STORAGE_DECL static __thread
