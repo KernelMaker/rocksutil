@@ -138,9 +138,6 @@ util/build_version.cc: FORCE
 FORCE: 
 
 LIBOBJECTS = $(LIB_SOURCES:.cc=.o)
-LIBOBJECTS += $(EXAMPLE_SOURCES:.cc=.o)
-
-EXAMPLES = log_example thread_local_example mutexlock_example thread_pool_example
 
 # if user didn't config LIBNAME, set the default
 ifeq ($(LIBNAME),)
@@ -200,11 +197,15 @@ endif  # PLATFORM_SHARED_EXT
 
 .PHONY: clean tags dbg static_lib shared_lib all
 
-all: $(LIBRARY) $(EXAMPLES)
+EXAMPLES = log_example thread_local_example mutexlock_example thread_pool_example
+
+all: $(LIBRARY)
 
 static_lib: $(LIBRARY)
 
 shared_lib: $(SHARED)
+
+example: $(EXAMPLES)
 
 dbg: $(LIBRARY) $(EXAMPLES)
 
@@ -225,6 +226,7 @@ thread_pool_example: examples/thread_pool_example.o $(LIBOBJECTS)
 	$(AM_LINK)
 
 clean:
+	make -C ./examples clean
 	rm -f $(EXAMPLES) $(LIBRARY) $(SHARED)
 	rm -rf $(CLEAN_FILES) ios-x86 ios-arm
 	find . -name "*.[oda]" -exec rm -f {} \;
