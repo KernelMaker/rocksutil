@@ -11,6 +11,9 @@ LIB_SOURCES = \
 	util/threadpool_imp.cc \
 	util/build_version.cc \
 	util/auto_roll_logger.cc \
+	util/sharded_cache.cc \
+	util/lru_cache.cc \
+	util/hash.cc \
 	port/port_posix.cc
 
 EXAMPLE_SOURCE = \
