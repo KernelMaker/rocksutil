@@ -68,14 +68,19 @@ Easy way to use Lock, RWLock, SpinLock
 
 Here is an [EXAMPLE](https://github.com/KernelMaker/rocksutil/blob/master/examples/mutexlock_example.cc)
 
-### 5. File Writer & Reader
+### 5. LRUCache
+Easy way to use lru cache
+
+Here is an [EXAMPLE](https://github.com/KernelMaker/rocksutil/blob/master/examples/lru_cache_example.cc)
+
+### 6. File Writer & Reader
 
 Easy way to read & write file in random or sequential mode, and use EnvOptions to manipulate
 the writer & reader to use [mmap, direct_io, buffer_read_write...]
 
 Here is an [EXAMPLE](https://github.com/KernelMaker/rocksutil/blob/master/examples/file_reader_writer_example.cc)
 
-### 6. Others
+### 7. Others
 Find more info in
 
 [Slice](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/slice.h)
@@ -83,6 +88,8 @@ Find more info in
 [Coding](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/coding.h)
 
 [Status](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/status.h)
+
+[Hash](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/hash.h )
 
 ## Where is it from?
 This ToolKit is mainly extracted from [rocksdb](https://github.com/facebook/rocksdb), I remove some specific features, change some and make it more
