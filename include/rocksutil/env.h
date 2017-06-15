@@ -80,6 +80,8 @@ struct EnvOptions {
   // write. By default, we set it to true for MANIFEST writes and false for
   // WAL writes
   bool fallocate_with_keep_size = true;
+
+  size_t writable_file_max_buffer_size = 1024 * 1024;
 };
 
 class Env {

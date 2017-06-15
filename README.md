@@ -68,7 +68,14 @@ Easy way to use Lock, RWLock, SpinLock
 
 Here is an [EXAMPLE](https://github.com/KernelMaker/rocksutil/blob/master/examples/mutexlock_example.cc)
 
-### 5. Others
+### 5. File Writer & Reader
+
+Easy way to read & write file in random or sequential mode, and use EnvOptions to manipulate
+the writer & reader to use [mmap, direct_io, buffer_read_write...]
+
+Here is an [EXAMPLE](https://github.com/KernelMaker/rocksutil/blob/master/examples/file_reader_writer_example.cc)
+
+### 6. Others
 Find more info in
 
 [Slice](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/slice.h)

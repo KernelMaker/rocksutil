@@ -14,7 +14,8 @@ LIB_SOURCES = \
 	util/sharded_cache.cc \
 	util/lru_cache.cc \
 	util/hash.cc \
-	port/port_posix.cc
+	port/port_posix.cc \
+	util/file_reader_writer.cc
 
 EXAMPLE_SOURCE = \
 	examples/log_example.cc \
