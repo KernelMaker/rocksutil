@@ -80,7 +80,13 @@ the writer & reader to use [mmap, direct_io, buffer_read_write...]
 
 Here is an [EXAMPLE](https://github.com/KernelMaker/rocksutil/blob/master/examples/file_reader_writer_example.cc)
 
-### 7. Others
+### 7. Write Ahead Log
+
+Easy way to write or recover from a robust [format](https://github.com/KernelMaker/rocksutil/blob/master/util/log_format.h) wal, based on FileWriter & FileReader
+
+Here is an [EXAMPLE](https://github.com/KernelMaker/rocksutil/blob/master/examples/wal_example.cc)
+
+### 8. Others
 Find more info in
 
 [Slice](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/slice.h)
@@ -90,6 +96,8 @@ Find more info in
 [Status](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/status.h)
 
 [Hash](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/hash.h )
+
+[CRC32](https://github.com/KernelMaker/rocksutil/blob/master/include/rocksutil/crc32c.h )
 
 ## Where is it from?
 This ToolKit is mainly extracted from [rocksdb](https://github.com/facebook/rocksdb), I remove some specific features, change some and make it more

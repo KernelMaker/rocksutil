@@ -198,7 +198,7 @@ endif  # PLATFORM_SHARED_EXT
 .PHONY: clean tags dbg static_lib shared_lib all
 
 EXAMPLES = log_example thread_local_example mutexlock_example thread_pool_example lru_cache_example \
-					 file_reader_writer_example
+					 file_reader_writer_example wal_example
 
 all: $(LIBRARY)
 
@@ -230,6 +230,9 @@ lru_cache_example: examples/lru_cache_example.o $(LIBOBJECTS)
 	$(AM_LINK)
 
 file_reader_writer_example: examples/file_reader_writer_example.o $(LIBOBJECTS)
+	$(AM_LINK)
+
+wal_example: examples/wal_example.o $(LIBOBJECTS)
 	$(AM_LINK)
 
 clean:
