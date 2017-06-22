@@ -6,7 +6,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "util/string_util.h"
+#include "rutil/string_util.h"
 
 namespace rocksutil {
 

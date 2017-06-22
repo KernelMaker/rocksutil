@@ -4,14 +4,14 @@
 //  of patent rights can be found in the PATENTS file in the same directory.
 //
 
-#include "util/random.h"
+#include "rutil/random.h"
 
 #include <stdint.h>
 #include <string.h>
 #include <thread>
 #include <utility>
 
-#include "port/likely.h"
+#include "rport/likely.h"
 #include "rocksutil/thread_local.h"
 
 #if ROCKSUTIL_SUPPORT_THREAD_LOCAL

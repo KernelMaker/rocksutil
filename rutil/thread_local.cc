@@ -9,7 +9,7 @@
 
 #include "rocksutil/thread_local.h"
 #include "rocksutil/mutexlock.h"
-#include "port/likely.h"
+#include "rport/likely.h"
 #include <stdlib.h>
 
 namespace rocksutil {

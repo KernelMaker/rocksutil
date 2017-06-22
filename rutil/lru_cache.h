@@ -8,10 +8,10 @@
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 #pragma once
 
-#include "util/sharded_cache.h"
+#include "rutil/sharded_cache.h"
 
-#include "port/port.h"
-#include "util/autovector.h"
+#include "rport/port.h"
+#include "rutil/autovector.h"
 
 namespace rocksutil {
 

@@ -12,7 +12,7 @@
 
 #include <memory>
 
-#include "util/log_format.h"
+#include "rutil/log_format.h"
 #include "rocksutil/slice.h"
 #include "rocksutil/status.h"
 

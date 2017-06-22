@@ -12,8 +12,8 @@
 #include <algorithm>
 #include <mutex>
 
-#include "port/port.h"
-#include "util/random.h"
+#include "rport/port.h"
+#include "rutil/random.h"
 
 namespace rocksutil {
 

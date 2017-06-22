@@ -38,13 +38,13 @@
 #endif
 #include <deque>
 #include <set>
-#include "port/port.h"
-#include "util/io_posix.h"
-#include "util/posix_logger.h"
-#include "util/random.h"
-#include "util/string_util.h"
+#include "rport/port.h"
+#include "rutil/io_posix.h"
+#include "rutil/posix_logger.h"
+#include "rutil/random.h"
+#include "rutil/string_util.h"
 #include "rocksutil/thread_local.h"
-#include "util/threadpool_imp.h"
+#include "rutil/threadpool_imp.h"
 
 #if !defined(TMPFS_MAGIC)
 #define TMPFS_MAGIC 0x01021994

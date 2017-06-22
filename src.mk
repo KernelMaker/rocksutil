@@ -1,24 +1,24 @@
 LIB_SOURCES = \
-	util/coding.cc \
-	util/env.cc \
-	util/env_posix.cc \
-	util/io_posix.cc \
-	util/random.cc \
-	util/status.cc \
-	util/status_message.cc \
-	util/string_util.cc \
-	util/thread_local.cc \
-	util/threadpool_imp.cc \
-	util/build_version.cc \
-	util/auto_roll_logger.cc \
-	util/sharded_cache.cc \
-	util/lru_cache.cc \
-	util/hash.cc \
-	util/file_reader_writer.cc \
-	util/crc32c.cc \
-	util/log_writer.cc \
-	util/log_reader.cc \
-	port/port_posix.cc
+	rutil/coding.cc \
+	rutil/env.cc \
+	rutil/env_posix.cc \
+	rutil/io_posix.cc \
+	rutil/random.cc \
+	rutil/status.cc \
+	rutil/status_message.cc \
+	rutil/string_util.cc \
+	rutil/thread_local.cc \
+	rutil/threadpool_imp.cc \
+	rutil/build_version.cc \
+	rutil/auto_roll_logger.cc \
+	rutil/sharded_cache.cc \
+	rutil/lru_cache.cc \
+	rutil/hash.cc \
+	rutil/file_reader_writer.cc \
+	rutil/crc32c.cc \
+	rutil/log_writer.cc \
+	rutil/log_reader.cc \
+	rport/port_posix.cc
 
 EXAMPLE_SOURCE = \
 	examples/log_example.cc \

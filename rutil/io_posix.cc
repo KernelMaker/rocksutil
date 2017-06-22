@@ -7,7 +7,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 
-#include "util/io_posix.h"
+#include "rutil/io_posix.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <algorithm>
@@ -25,10 +25,10 @@
 #include <sys/statfs.h>
 #include <sys/syscall.h>
 #endif
-#include "port/port.h"
+#include "rport/port.h"
 #include "rocksutil/coding.h"
-#include "util/posix_logger.h"
-#include "util/string_util.h"
+#include "rutil/posix_logger.h"
+#include "rutil/string_util.h"
 
 namespace rocksutil {
 

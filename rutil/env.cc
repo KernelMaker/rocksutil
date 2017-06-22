@@ -10,10 +10,10 @@
 #include "rocksutil/env.h"
 
 #include <thread>
-#include "port/port.h"
-#include "port/sys_time.h"
+#include "rport/port.h"
+#include "rport/sys_time.h"
 
-#include "util/autovector.h"
+#include "rutil/autovector.h"
 
 namespace rocksutil {
 

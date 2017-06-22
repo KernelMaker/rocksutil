@@ -121,15 +121,15 @@ LDFLAGS += $(PLATFORM_LDFLAGS)
 
 date := $(shell date +%F)
 git_sha := $(shell git rev-parse HEAD 2>/dev/null)
-gen_build_version = sed -e s/@@GIT_SHA@@/$(git_sha)/ -e s/@@GIT_DATE_TIME@@/$(date)/ util/build_version.cc.in
+gen_build_version = sed -e s/@@GIT_SHA@@/$(git_sha)/ -e s/@@GIT_DATE_TIME@@/$(date)/ rutil/build_version.cc.in
 # Record the version of the source that we are compiling.
 # We keep a record of the git revision in this file.  It is then built
 # as a regular source file as part of the compilation process.
 # One can run "strings executable_filename | grep _build_" to find
 # the version of the source that we used to build the executable file.
-CLEAN_FILES += util/build_version.cc
+CLEAN_FILES += rutil/build_version.cc
 
-util/build_version.cc: FORCE
+rutil/build_version.cc: FORCE
 	$(AM_V_GEN)rm -f $@-t
 	$(AM_V_at)$(gen_build_version) > $@-t
 	$(AM_V_at)if test -f $@; then         \

@@ -14,8 +14,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "util/autovector.h"
-#include "port/port.h"
+#include "rutil/autovector.h"
+#include "rport/port.h"
 
 #ifndef ROCKSUTIL_SUPPORT_THREAD_LOCAL
 #define ROCKSUTIL_SUPPORT_THREAD_LOCAL \

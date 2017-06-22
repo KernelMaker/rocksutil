@@ -9,8 +9,8 @@
 #pragma once
 #include <string>
 #include "rocksutil/env.h"
-#include "util/aligned_buffer.h"
-#include "port/port.h"
+#include "rutil/aligned_buffer.h"
+#include "rport/port.h"
 
 namespace rocksutil {
 
