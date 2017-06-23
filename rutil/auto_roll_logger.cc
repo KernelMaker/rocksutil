@@ -142,11 +142,10 @@ bool AutoRollLogger::LogExpired() {
 
 //Status CreateLoggerFromOptions(Env* env, const std::string& log_path,
 Status CreateLogger(const std::string& log_path,
-         std::shared_ptr<Logger>* logger,
+         std::shared_ptr<Logger>* logger, Env* env,
          size_t log_max_size, size_t log_file_time_to_roll,
          const InfoLogLevel log_level) {
 
-  Env* env = Env::Default();
   std::string fname =
       InfoLogFileName(log_path);
 

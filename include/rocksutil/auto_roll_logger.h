@@ -116,7 +116,7 @@ class AutoRollLogger : public Logger {
 };
 
 Status CreateLogger(const std::string& log_path,
-         std::shared_ptr<Logger>* logger,
+         std::shared_ptr<Logger>* logger, Env* env,
          size_t log_max_size = 0, size_t log_file_time_to_roll = 0,
          const InfoLogLevel log_level = InfoLogLevel::INFO_LEVEL);
 

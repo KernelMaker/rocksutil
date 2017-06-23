@@ -39,9 +39,10 @@ void WriteLog(std::shared_ptr<Logger>log, int thread_num) {
 
 int main() {
 
+  Env* env = Env::Default();
   std::shared_ptr<Logger> log;
   // 1. Default logger: never roll log file, log_level = InfoLogLevel::INFO_LEVEL;
-  Status s = CreateLogger("./log_path", &log);
+  Status s = CreateLogger("./log_path", &log, env);
 
   // 2. logger: roll to next file per 5s, log_level = InfoLogLevel::WARN_LEVEL;
   // Status s = CreateLogger("tmp", &log, 0, 5, InfoLogLevel::WARN_LEVEL);
