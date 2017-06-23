@@ -29,3 +29,5 @@
 *.app
 
 tags
+make_config.mk
+rutil/build_version.cc
