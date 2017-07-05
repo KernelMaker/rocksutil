@@ -102,6 +102,8 @@ class Reader {
   // Undefined before the first call to ReadRecord.
   uint64_t LastRecordOffset();
 
+  uint64_t EndOfBufferOffset();
+
   // returns true if the reader has encountered an eof condition.
   bool IsEOF() {
     return eof_;

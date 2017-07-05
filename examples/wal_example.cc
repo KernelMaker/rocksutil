@@ -70,9 +70,12 @@ int main() {
             true, 0);
   std::string scratch;
   Slice record;
+  std::cout << log_reader.IsEOF() << std::endl;
   while (log_reader.ReadRecord(&record, &scratch) && s.ok()) {
-    std::cout << std::string(record.data(), record.size()) << std::endl;
+    std::cout << std::string(record.data(), record.size()) <<
+      " " << log_reader.LastRecordOffset() << " " <<
+      log_reader.EndOfBufferOffset() << std::endl;
   }
-  std::cout << s.ToString() << std::endl;
+  std::cout << log_reader.IsEOF() << " " << s.ToString() << std::endl;
   return 0;
 }
