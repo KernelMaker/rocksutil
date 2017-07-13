@@ -23,8 +23,9 @@ class AutoRollLogger : public Logger {
  public:
   AutoRollLogger(Env* env, const std::string& log_path,
                  size_t log_max_size, size_t log_file_time_to_roll,
-                 const InfoLogLevel log_level = InfoLogLevel::INFO_LEVEL)
-      : Logger(log_level),
+                 const InfoLogLevel log_level = InfoLogLevel::INFO_LEVEL,
+                 uint64_t flush_every_seconds = 5)
+      : Logger(flush_every_seconds, log_level),
         log_path_(log_path),
         env_(env),
         status_(Status::OK()),
@@ -118,6 +119,7 @@ class AutoRollLogger : public Logger {
 Status CreateLogger(const std::string& log_path,
          std::shared_ptr<Logger>* logger, Env* env,
          size_t log_max_size = 0, size_t log_file_time_to_roll = 0,
-         const InfoLogLevel log_level = InfoLogLevel::INFO_LEVEL);
+         const InfoLogLevel log_level = InfoLogLevel::INFO_LEVEL,
+         uint64_t flush_every_seconds = 5);
 
 }  // namespace rocksutil

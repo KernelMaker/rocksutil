@@ -528,6 +528,7 @@ class PosixEnv : public Env {
   }
 
   virtual Status NewLogger(const std::string& fname,
+                           uint64_t flush_every_seconds,
                            shared_ptr<Logger>* result) override {
     FILE* f;
     {
@@ -542,7 +543,8 @@ class PosixEnv : public Env {
       fallocate(fd, FALLOC_FL_KEEP_SIZE, 0, 4 * 1024);
 #endif
       SetFD_CLOEXEC(fd, nullptr);
-      result->reset(new PosixLogger(f, &PosixEnv::gettid, this));
+      result->reset(new PosixLogger(f, &PosixEnv::gettid, this,
+            flush_every_seconds));
       return Status::OK();
     }
   }

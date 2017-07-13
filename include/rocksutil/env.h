@@ -285,6 +285,7 @@ class Env {
 
   // Create and return a log file for storing informational messages.
   virtual Status NewLogger(const std::string& fname,
+                           uint64_t flush_every_seconds,
                            shared_ptr<Logger>* result) = 0;
 
   // Returns the number of micro-seconds since some fixed point in time. Only
@@ -713,8 +714,10 @@ class Logger {
  public:
   size_t kDoNotSupportGetLogFileSize = std::numeric_limits<size_t>::max();
 
-  explicit Logger(const InfoLogLevel log_level = InfoLogLevel::INFO_LEVEL)
-      : log_level_(log_level) {}
+  Logger(uint64_t flush_every_seconds = 5,
+        const InfoLogLevel log_level = InfoLogLevel::INFO_LEVEL)
+      : flush_every_seconds_(flush_every_seconds),
+        log_level_(log_level) {}
   virtual ~Logger();
 
   // Write a header to the log file with the specified format
@@ -742,6 +745,9 @@ class Logger {
   virtual void SetInfoLogLevel(const InfoLogLevel log_level) {
     log_level_ = log_level;
   }
+
+ protected:
+  uint64_t flush_every_seconds_;
 
  private:
   // No copying allowed
@@ -920,8 +926,10 @@ class EnvWrapper : public Env {
     return target_->GetTestDirectory(path);
   }
   virtual Status NewLogger(const std::string& fname,
+                           uint64_t flush_every_seconds,
                            shared_ptr<Logger>* result) override {
-    return target_->NewLogger(fname, result);
+    return target_->NewLogger(fname, flush_every_seconds,
+        result);
   }
   uint64_t NowMicros() override { return target_->NowMicros(); }
   void SleepForMicroseconds(int micros) override {

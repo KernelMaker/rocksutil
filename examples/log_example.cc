@@ -25,7 +25,8 @@ using namespace rocksutil;
  *    Status CreateLogger(const std::string log_path, std::shared_ptr<Logger>* log,
  *            size_t log_max_size = 0 [never roll],
  *            size_t log_file_time_to_roll = 0 [never roll],
- *            const InfoLogLevel = InfoLogLevel::INFO_LEVEL);
+ *            const InfoLogLevel = InfoLogLevel::INFO_LEVEL,
+ *            uint64_t flush_every_seconds = 5);
  */
 
 
@@ -42,13 +43,16 @@ int main() {
   Env* env = Env::Default();
   std::shared_ptr<Logger> log;
   // 1. Default logger: never roll log file, log_level = InfoLogLevel::INFO_LEVEL;
+  // flush_every_seconds = 5
   Status s = CreateLogger("./log_path", &log, env);
 
   // 2. logger: roll to next file per 5s, log_level = InfoLogLevel::WARN_LEVEL;
-  // Status s = CreateLogger("tmp", &log, 0, 5, InfoLogLevel::WARN_LEVEL);
+  // always flush
+  // Status s = CreateLogger("tmp", &log, 0, 5, InfoLogLevel::WARN_LEVEL, 0);
   
   // 3. logger roll to next file per 100M, log_level = InfoLogLevel::ERROR_LEVEL;
-  // Status s = CreateLogger("tmp", &log, 1024*1024*100, 0, InfoLogLevel::WARN_LEVEL);
+  // flush every 3s
+  // Status s = CreateLogger("tmp", &log, 1024*1024*100, 0, InfoLogLevel::WARN_LEVEL, 3);
   std::cout << s.ToString() << std::endl;
 
   Header(log, "-------------------------------------------------------------------");

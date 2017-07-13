@@ -21,7 +21,8 @@ static std::string OldInfoLogFileName(const std::string& log_path,
 
 // -- AutoRollLogger
 Status AutoRollLogger::ResetLogger() {
-  status_ = env_->NewLogger(log_fname_, &logger_);
+  status_ = env_->NewLogger(log_fname_,
+      flush_every_seconds_, &logger_);
 
   if (!status_.ok()) {
     return status_;
@@ -144,7 +145,8 @@ bool AutoRollLogger::LogExpired() {
 Status CreateLogger(const std::string& log_path,
          std::shared_ptr<Logger>* logger, Env* env,
          size_t log_max_size, size_t log_file_time_to_roll,
-         const InfoLogLevel log_level) {
+         const InfoLogLevel log_level,
+         uint64_t flush_every_seconds) {
 
   std::string fname =
       InfoLogFileName(log_path);
@@ -154,7 +156,7 @@ Status CreateLogger(const std::string& log_path,
   if (log_file_time_to_roll > 0 || log_max_size > 0) {
     AutoRollLogger* result = new AutoRollLogger(
         env, log_path, log_max_size, log_file_time_to_roll,
-        log_level);
+        log_level, flush_every_seconds);
     Status s = result->GetStatus();
     if (!s.ok()) {
       delete result;
@@ -166,7 +168,8 @@ Status CreateLogger(const std::string& log_path,
     // Open a log file in the same directory as the db
     env->RenameFile(
         fname, OldInfoLogFileName(log_path, env->NowMicros()));
-    auto s = env->NewLogger(fname, logger);
+    auto s = env->NewLogger(fname, flush_every_seconds,
+        logger);
     if (logger->get() != nullptr) {
       (*logger)->SetInfoLogLevel(log_level);
     }

@@ -34,14 +34,14 @@ class PosixLogger : public Logger {
   uint64_t (*gettid_)();  // Return the thread id for the current thread
   std::atomic_size_t log_size_;
   int fd_;
-  const static uint64_t flush_every_seconds_ = 5;
   std::atomic_uint_fast64_t last_flush_micros_;
   Env* env_;
   bool flush_pending_;
  public:
   PosixLogger(FILE* f, uint64_t (*gettid)(), Env* env,
+              uint64_t flush_every_seconds = 5,
               const InfoLogLevel log_level = InfoLogLevel::ERROR_LEVEL)
-      : Logger(log_level),
+      : Logger(flush_every_seconds, log_level),
         file_(f),
         gettid_(gettid),
         log_size_(0),
@@ -57,7 +57,9 @@ class PosixLogger : public Logger {
       flush_pending_ = false;
       fflush(file_);
     }
-    last_flush_micros_ = env_->NowMicros();
+    if (flush_every_seconds_) {
+      last_flush_micros_ = env_->NowMicros();
+    }
   }
 
   using Logger::Logv;
@@ -147,10 +149,15 @@ class PosixLogger : public Logger {
       if (sz > 0) {
         log_size_ += write_size;
       }
-      uint64_t now_micros = static_cast<uint64_t>(now_tv.tv_sec) * 1000000 +
-        now_tv.tv_usec;
-      if (now_micros - last_flush_micros_ >= flush_every_seconds_ * 1000000) {
+      // Always flush
+      if (flush_every_seconds_ == 0) {
         Flush();
+      } else {
+        uint64_t now_micros = static_cast<uint64_t>(now_tv.tv_sec) * 1000000 +
+          now_tv.tv_usec;
+        if (now_micros - last_flush_micros_ >= flush_every_seconds_ * 1000000) {
+          Flush();
+        }
       }
       if (base != buffer) {
         delete[] base;
