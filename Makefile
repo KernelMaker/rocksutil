@@ -200,6 +200,12 @@ endif  # PLATFORM_SHARED_EXT
 EXAMPLES = log_example thread_local_example mutexlock_example thread_pool_example lru_cache_example \
 					 file_reader_writer_example wal_example
 
+.cc.o:
+	  $(AM_V_CC)$(CXX) $(CXXFLAGS) -c $< -o $@ $(COVERAGEFLAGS)
+
+.c.o:
+	  $(AM_V_CC)$(CC) $(CFLAGS) -c $< -o $@
+
 all: $(LIBRARY)
 
 static_lib: $(LIBRARY)
