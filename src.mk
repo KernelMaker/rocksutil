@@ -1,4 +1,5 @@
 LIB_SOURCES = \
+	rutil/build_version.cc \
 	rutil/coding.cc \
 	rutil/env.cc \
 	rutil/env_posix.cc \
@@ -9,7 +10,6 @@ LIB_SOURCES = \
 	rutil/string_util.cc \
 	rutil/thread_local.cc \
 	rutil/threadpool_imp.cc \
-	rutil/build_version.cc \
 	rutil/auto_roll_logger.cc \
 	rutil/sharded_cache.cc \
 	rutil/lru_cache.cc \
